@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شكراً لتواصلك معنا - تواصل الرياض</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: "Desert Harmony" (Warm neutrals like bg-stone-100, a primary deep blue for text/headings like text-blue-900, and a muted gold accent for highlights like border-amber-400) -->
+    <!-- Application Structure Plan: A single-page application structured in three strategic sections. 1) Instant Confirmation: Immediately reassures the user and sets clear expectations (15-min callback). This reduces post-submission anxiety. 2) Engagement Hub: Utilizes the user's peak interest by offering valuable, related content (video demo, cross-sell, social proof). This prevents bounce and deepens brand engagement. 3) Fast-Track CTA: Provides an immediate contact option (WhatsApp) for high-intent, urgent users. This structure transforms a static page into a dynamic, trust-building, and conversion-focused touchpoint. -->
+    <!-- Visualization & Content Choices: Confirmation -> Goal: Reassure -> Viz: Large heading with a prominent checkmark icon (HTML Unicode). Interaction: None. Justification: Clear, immediate feedback. || Engagement Hub -> Goal: Engage & Upsell -> Viz: 3-column responsive card layout (HTML/Tailwind). Interaction: Clickable cards and a modal window for the video to keep the user on the page. Justification: Organizes secondary content cleanly without overwhelming the user. || Fast Track -> Goal: Convert Urgent Leads -> Viz: Large, prominent button with a WhatsApp icon. Interaction: Direct link to WhatsApp chat. Justification: Reduces friction for motivated users. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #f9fafb; /* bg-gray-50 */
+        }
+        .hero-icon {
+            font-size: 5rem;
+            line-height: 1;
+            color: #22c55e; /* text-green-500 */
+        }
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+        }
+        #videoModal {
+            transition: opacity 0.3s ease;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="min-h-screen flex flex-col items-center justify-center p-4">
+        
+        <!-- Section 1: Main Confirmation Message -->
+        <main class="w-full max-w-4xl mx-auto text-center bg-white shadow-xl rounded-2xl p-8 md:p-12">
+            <div class="hero-icon mb-4">
+                <span>&#10004;</span> <!-- Checkmark Icon -->
+            </div>
+            <h1 class="text-4xl md:text-5xl font-extrabold text-blue-900 mb-4">شكراً لتواصلك معنا!</h1>
+            <p class="text-lg md:text-xl text-gray-600 mb-6">تم استلام طلبك بنجاح، أنت الآن على بعد خطوة واحدة من تأمين مركبتك.</p>
+            
+            <div class="bg-blue-50 border-r-4 border-blue-500 p-5 rounded-lg text-right max-w-2xl mx-auto">
+                <h2 class="text-xl font-bold text-blue-800 mb-2">ماذا سيحدث الآن؟</h2>
+                <p class="text-gray-700">سيقوم أحد خبرائنا بمراجعة طلبك والتواصل معك عبر رقم الهاتف الذي زودتنا به (خلال ساعات العمل الرسمية).</p>
+            </div>
+        </main>
+
+        <!-- Section 2: "While you wait..." Engagement Hub -->
+        <section class="w-full max-w-6xl mx-auto mt-12 text-center">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8">بينما تنتظر مكالمة خبيرنا، اكتشف المزيد:</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Card 1: Watch Video -->
+                <div id="open-modal-button" class="card bg-white rounded-xl shadow-lg p-6 cursor-pointer">
+                    <div class="text-4xl mb-4 text-amber-500">🎬</div>
+                    <h3 class="text-xl font-bold text-blue-900 mb-2">شاهد قوة نظامنا بنفسك</h3>
+                    <p class="text-gray-600 mb-4">شاهد في 60 ثانية كيف يمكنك تتبع مركبتك وإيقافها بضغطة زر من جوالك.</p>
+                    <span class="font-bold text-blue-600 hover:text-blue-800">شاهد الفيديو الآن &larr;</span>
+                </div>
+
+                <!-- Card 2: Cross-sell Dashcam -->
+                <a href="#" class="card bg-white rounded-xl shadow-lg p-6 block">
+                    <div class="text-4xl mb-4 text-amber-500">📹</div>
+                    <h3 class="text-xl font-bold text-blue-900 mb-2">هل فكرت في إضافة داش كام؟</h3>
+                    <p class="text-gray-600 mb-4">اكتشف كيف يمكنك حماية نفسك وسائقيك بكاميرا ذكية تراقب الطريق وسلوك السائق.</p>
+                    <span class="font-bold text-blue-600 hover:text-blue-800">تعرّف على الداش كام &larr;</span>
+                </a>
+
+                <!-- Card 3: Social Proof -->
+                <a href="#" class="card bg-white rounded-xl shadow-lg p-6 block">
+                    <div class="text-4xl mb-4 text-amber-500">⭐</div>
+                    <h3 class="text-xl font-bold text-blue-900 mb-2">لماذا يثق بنا الآلاف؟</h3>
+                    <p class="text-gray-600 mb-4">اقرأ قصص نجاح عملاء من أفراد وشركات استطاعوا تأمين أساطيلهم وحماية مركباتهم معنا.</p>
+                    <span class="font-bold text-blue-600 hover:text-blue-800">اقرأ آراء العملاء &larr;</span>
+                </a>
+
+            </div>
+        </section>
+
+        <!-- Section 3: Fast Track CTA -->
+        <section class="w-full max-w-4xl mx-auto mt-16 text-center bg-green-50 p-8 rounded-2xl border-t-4 border-green-500">
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4">هل تحتاج إلى إجابة فورية؟</h2>
+            <p class="text-gray-600 mb-6 max-w-xl mx-auto">لا تتردد في التواصل معنا مباشرة عبر الواتساب. فريقنا جاهز للرد على جميع استفساراتك الآن.</p>
+            <a href="https://wa.me/966112047050 " target="_blank" class="inline-flex items-center justify-center bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-full text-lg transition-transform transform hover:scale-105">
+                <span class="ml-2">💬</span>
+                تحدث معنا مباشرة عبر الواتساب
+            </a>
+        </section>
+    </div>
+
+    <!-- Video Modal -->
+    <div id="videoModal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-50 opacity-0 pointer-events-none">
+        <div class="bg-white rounded-lg shadow-2xl w-full max-w-3xl overflow-hidden relative">
+            <button id="close-modal-button" class="absolute top-2 right-2 text-white bg-black bg-opacity-50 rounded-full w-8 h-8 flex items-center justify-center text-2xl z-10">&times;</button>
+            <div class="aspect-w-16 aspect-h-9">
+                <!-- Replace with your actual video embed URL -->
+                <iframe class="w-full h-full" src="https://www.youtube.com/embed/bOoGr88GYz0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const videoModal = document.getElementById('videoModal');
+        const openModalButton = document.getElementById('open-modal-button');
+        const closeModalButton = document.getElementById('close-modal-button');
+
+        function openModal() {
+            videoModal.classList.remove('opacity-0', 'pointer-events-none');
+        }
+
+        function closeModal() {
+            videoModal.classList.add('opacity-0', 'pointer-events-none');
+            // Stop the video from playing
+            const iframe = videoModal.querySelector('iframe');
+            const videoSrc = iframe.src;
+            iframe.src = videoSrc; // This reloads the iframe, stopping the video
+        }
+
+        openModalButton.addEventListener('click', openModal);
+        closeModalButton.addEventListener('click', closeModal);
+        
+        // Close modal when clicking on the background overlay
+        videoModal.addEventListener('click', (event) => {
+            if (event.target === videoModal) {
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+
+</body>
+</html>
