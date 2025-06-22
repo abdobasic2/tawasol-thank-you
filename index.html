@@ -3,426 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تواصل الرياض - أفضل نظام تتبع سيارات في السعودية</title>
+    <title>شكراً لتواصلك معنا - تواصل الرياض</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-    <!-- Chosen Palette: Tawasol Brand Palette (Blue, Gold, Green, White) -->
-    <!-- Application Structure Plan: A single-page landing page designed for conversion. The structure follows a logical flow: 1) Hero section with a strong value proposition and primary CTA. 2) Social Proof (accreditations) to build immediate trust, now as a dynamic slider. 3) Problem/Solution section explaining core benefits. 4) "How it Works" section with a visual aid. 5) Dedicated sections for different customer segments (Tabs). 6) A section for the Dashcam as an upsell. 7) Customer testimonials. 8) A final, clear CTA section. This structure guides the user from awareness to consideration and finally to conversion, with an enhanced persistent WhatsApp button for immediate assistance. -->
-    <!-- Visualization & Content Choices: Benefits -> Goal: Inform & Persuade -> Viz: Icon-based feature list. Interaction: Hover effects. Justification: Visually engaging. || Customer Segments -> Goal: Personalize -> Viz: Interactive Tabs. Interaction: Click to switch content. Justification: Prevents information overload. || Accreditations -> Goal: Build Trust -> Viz: Autoplaying logo slider (Swiper.js). Interaction: Continuous loop. Justification: Dynamically showcases all partners without taking up excessive space. || Testimonials -> Goal: Build Trust -> Viz: Card-based layout. Justification: Clear and easy to read. -->
+    <!-- Chosen Palette: "Desert Harmony" (Warm neutrals like bg-stone-100, a primary deep blue for text/headings like text-blue-900, and a muted gold accent for highlights like border-amber-400) -->
+    <!-- Application Structure Plan: A single-page application structured in three strategic sections. 1) Instant Confirmation: Immediately reassures the user and sets clear expectations (15-min callback). This reduces post-submission anxiety. 2) Engagement Hub: Utilizes the user's peak interest by offering valuable, related content (video demo, cross-sell, social proof). This prevents bounce and deepens brand engagement. 3) Fast-Track CTA: Provides an immediate contact option (WhatsApp) for high-intent, urgent users. This structure transforms a static page into a dynamic, trust-building, and conversion-focused touchpoint. -->
+    <!-- Visualization & Content Choices: Confirmation -> Goal: Reassure -> Viz: Large heading with a prominent checkmark icon (HTML Unicode). Interaction: None. Justification: Clear, immediate feedback. || Engagement Hub -> Goal: Engage & Upsell -> Viz: 3-column responsive card layout (HTML/Tailwind). Interaction: Clickable cards and a modal window for the video to keep the user on the page. Justification: Organizes secondary content cleanly without overwhelming the user. || Fast Track -> Goal: Convert Urgent Leads -> Viz: Large, prominent button with a WhatsApp icon. Interaction: Direct link to WhatsApp chat. Justification: Reduces friction for motivated users. -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
         body {
             font-family: 'Tajawal', sans-serif;
-            scroll-behavior: smooth;
+            background-color: #f9fafb; /* bg-gray-50 */
         }
-        .hero-section {
-            background: linear-gradient(rgba(0, 21, 53, 0.7), rgba(0, 21, 53, 0.7)), url('https://storage.googleapis.com/gemini-prod-us-west1-assets/images/5d3c880058b53460.jpeg') center center/cover no-repeat;
+        .hero-icon {
+            font-size: 5rem;
+            line-height: 1;
+            color: #22c55e; /* text-green-500 */
         }
-        .brand-gold { color: #f59e0b; }
-        .brand-blue { color: #002D62; }
-        .bg-brand-blue { background-color: #002D62; }
-        .hover\:bg-brand-gold:hover { background-color: #f59e0b; }
-        .border-brand-gold { border-color: #f59e0b; }
-        .tab-button.active {
-            background-color: #002D62;
-            color: white;
-            border-color: #f59e0b;
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .feature-card {
-            transition: transform 0.3s, box-shadow 0.3s;
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
         }
-        .feature-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 10px 20px rgba(0, 45, 98, 0.15);
-        }
-        .whatsapp-container {
-            position: fixed;
-            bottom: 25px;
-            left: 25px;
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-        }
-        .whatsapp-button {
-            background-color: #25D366;
-            color: white;
-            width: 64px;
-            height: 64px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
-            transition: all 0.3s;
-            animation: pulse 2s infinite;
-        }
-        .whatsapp-button:hover {
-            transform: scale(1.1);
-        }
-        .whatsapp-message {
-            background-color: white;
-            color: #333;
-            padding: 8px 16px;
-            border-radius: 15px;
-            margin-right: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-            font-size: 14px;
-            font-weight: 500;
-            white-space: nowrap;
-        }
-        .map-container {
-            position: relative;
-            overflow: hidden;
-            padding-top: 56.25%; /* 16:9 Aspect Ratio */
-        }
-        .map-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-        .swiper-slide {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        #videoModal {
+            transition: opacity 0.3s ease;
         }
     </style>
 </head>
-<body class="bg-gray-50">
+<body class="text-gray-800">
 
-    <!-- Header -->
-    <header class="bg-white shadow-md sticky top-0 z-50">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <h1 class="text-2xl font-bold brand-blue">
-                تواصل الرياض
-            </h1>
-            <a href="#contact-form" class="bg-brand-blue text-white font-bold py-2 px-6 rounded-lg hover:bg-opacity-90 transition-colors">
-                احجز استشارتك
-            </a>
-        </nav>
-    </header>
+    <div class="min-h-screen flex flex-col items-center justify-center p-4">
+        
+        <!-- Section 1: Main Confirmation Message -->
+        <main class="w-full max-w-4xl mx-auto text-center bg-white shadow-xl rounded-2xl p-8 md:p-12">
+            <div class="hero-icon mb-4">
+                <span>&#10004;</span> <!-- Checkmark Icon -->
+            </div>
+            <h1 class="text-4xl md:text-5xl font-extrabold text-blue-900 mb-4">شكراً لتواصلك معنا!</h1>
+            <p class="text-lg md:text-xl text-gray-600 mb-6">تم استلام طلبك بنجاح، أنت الآن على بعد خطوة واحدة من تأمين مركبتك.</p>
+            
+            <div class="bg-blue-50 border-r-4 border-blue-500 p-5 rounded-lg text-right max-w-2xl mx-auto">
+                <h2 class="text-xl font-bold text-blue-800 mb-2">ماذا سيحدث الآن؟</h2>
+                <p class="text-gray-700">سيقوم أحد خبرائنا بمراجعة طلبك والتواصل معك عبر رقم الهاتف الذي زودتنا به (خلال ساعات العمل الرسمية).</p>
+            </div>
+        </main>
 
-    <!-- Hero Section -->
-    <section class="hero-section text-white text-center py-20 md:py-32">
-        <div class="container mx-auto px-6">
-            <h1 class="text-4xl md:text-6xl font-extrabold mb-4 animate__animated animate__fadeInDown">تحكم. تتبع. اطمئن.</h1>
-            <h2 class="text-xl md:text-2xl mb-8 animate__animated animate__fadeInUp">أفضل نظام تتبع سيارات في السعودية</h2>
-            <p class="max-w-2xl mx-auto mb-10 animate__animated animate__fadeInUp animate__delay-1s">تحكّم في مركبتك وتتبعها لحظة بلحظة مع الحلول الذكية من تواصل الرياض المعتمدة من هيئة النقل.</p>
-            <a href="#contact-form" class="bg-amber-500 text-brand-blue font-bold py-4 px-10 text-lg rounded-lg hover:bg-amber-400 transition-colors transform hover:scale-105 animate__animated animate__pulse animate__delay-2s animate__infinite">
-                أحصل على جهاز تتبع مجاناً
-            </a>
-        </div>
-    </section>
-
-    <!-- Accreditations Section -->
-    <section class="py-12 bg-gray-100">
-        <div class="container mx-auto px-6">
-            <h3 class="text-center text-2xl font-bold text-gray-500 mb-8">معتمدون من قبل الجهات الرسمية</h3>
-            <div class="swiper-container logo-slider">
-                <div class="swiper-wrapper">
-                    <!-- IMPORTANT: Replace these placeholder images with the official logos -->
-                    <div class="swiper-slide"><img src="https://placehold.co/150x80/FFFFFF/000000?text=هيئة+النقل" alt="شعار هيئة النقل العام" class="mx-auto h-16 grayscale hover:grayscale-0 transition-all duration-300"></div>
-                    <div class="swiper-slide"><img src="https://placehold.co/150x80/FFFFFF/000000?text=هيئة+الاتصالات" alt="شعار هيئة الاتصالات وتقنية المعلومات" class="mx-auto h-16 grayscale hover:grayscale-0 transition-all duration-300"></div>
-                    <div class="swiper-slide"><img src="https://placehold.co/150x80/FFFFFF/000000?text=منصة+وصل" alt="شعار منصة وصل" class="mx-auto h-16 grayscale hover:grayscale-0 transition-all duration-300"></div>
-                    <div class="swiper-slide"><img src="https://placehold.co/150x80/FFFFFF/000000?text=أمانة+جدة" alt="شعار أمانة جدة" class="mx-auto h-16 grayscale hover:grayscale-0 transition-all duration-300"></div>
-                    <div class="swiper-slide"><img src="https://placehold.co/150x80/FFFFFF/000000?text=وزارة+الشؤون+البلدية" alt="شعار وزارة الشؤون البلدية والقروية" class="mx-auto h-16 grayscale hover:grayscale-0 transition-all duration-300"></div>
-                    <div class="swiper-slide"><img src="https://placehold.co/150x80/FFFFFF/000000?text=النقابة+العامة+للسيارات" alt="شعار النقابة العامة للسيارات" class="mx-auto h-16 grayscale hover:grayscale-0 transition-all duration-300"></div>
-                     <div class="swiper-slide"><img src="https://placehold.co/150x80/FFFFFF/000000?text=هيئة+الغذاء+والدواء" alt="شعار هيئة الغذاء والدواء" class="mx-auto h-16 grayscale hover:grayscale-0 transition-all duration-300"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Why Choose Us Section -->
-    <section class="py-20">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-extrabold brand-blue mb-4">لماذا تختار نظام تواصل الرياض لتتبع السيارات؟</h2>
-                <p class="text-lg text-gray-600 max-w-3xl mx-auto">نقدم لك نظاماً متكاملاً يمنحك راحة البال، ويوفر لك المال، ويضمن لك الامتثال الكامل للوائح الرسمية.</p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                <!-- Feature Card -->
-                <div class="feature-card text-center bg-white p-8 rounded-xl shadow-lg">
-                    <div class="text-5xl brand-gold mb-4">🛡️</div>
-                    <h3 class="text-xl font-bold brand-blue mb-2">حماية فائقة من السرقة</h3>
-                    <p class="text-gray-600">تتبع لحظي لموقع سيارتك مع إمكانية إيقاف المحرك عن بعد بضغطة زر من جوالك.</p>
-                </div>
-                <!-- Feature Card -->
-                <div class="feature-card text-center bg-white p-8 rounded-xl shadow-lg">
-                    <div class="text-5xl brand-gold mb-4">⛽</div>
-                    <h3 class="text-xl font-bold brand-blue mb-2">توفير في استهلاك الوقود</h3>
-                    <p class="text-gray-600">تقارير ذكية تساعدك على تحسين كفاءة القيادة وتقليل مصروفات الوقود حتى 30%.</p>
-                </div>
-                <!-- Feature Card -->
-                <div class="feature-card text-center bg-white p-8 rounded-xl shadow-lg">
-                    <div class="text-5xl brand-gold mb-4">📋</div>
-                    <h3 class="text-xl font-bold brand-blue mb-2">اعتماد رسمي وتقارير فورية</h3>
-                    <p class="text-gray-600">متوافقون تماماً مع متطلبات منصة "وصل" لاستخراج كرت التشغيل بسهولة ودون عناء.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Services Tabs Section -->
-    <section id="services" class="py-20 bg-gray-100">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-extrabold brand-blue mb-4">حلول مصممة خصيصاً لك</h2>
-                <p class="text-lg text-gray-600 max-w-3xl mx-auto">سواء كنت فرداً أو تدير أسطولاً ضخماً، لدينا الحل المناسب لاحتياجاتك.</p>
-            </div>
-            <div class="max-w-4xl mx-auto">
-                <div class="flex justify-center border-b-2 border-gray-200 mb-8 space-x-2 space-x-reverse">
-                    <button class="tab-button text-lg font-bold py-3 px-6 text-gray-500 border-b-4 border-transparent active" onclick="openTab(event, 'personal')">الأفراد</button>
-                    <button class="tab-button text-lg font-bold py-3 px-6 text-gray-500 border-b-4 border-transparent" onclick="openTab(event, 'rental')">شركات التأجير</button>
-                    <button class="tab-button text-lg font-bold py-3 px-6 text-gray-500 border-b-4 border-transparent" onclick="openTab(event, 'fleet')">أساطيل النقل</button>
-                    <button class="tab-button text-lg font-bold py-3 px-6 text-gray-500 border-b-4 border-transparent" onclick="openTab(event, 'schools')">المدارس</button>
-                </div>
-                <div id="personal" class="tab-content bg-white p-8 rounded-xl shadow-md">
-                    <h3 class="text-2xl font-bold brand-blue mb-4">حلول الأمان للأفراد</h3>
-                    <p class="text-gray-700">نوفر لك أفضل جهاز تتبع سيارات صغير ومخفي لحماية سيارتك من السرقة، ومراقبة السائق الخاص، والاطمئنان على سلامة أفراد عائلتك في كل رحلة. استمتع براحة البال مع نظام تتبع يمنحك رؤية كاملة لموقع وسرعة سيارتك على مدار الساعة.</p>
-                </div>
-                <div id="rental" class="tab-content bg-white p-8 rounded-xl shadow-md" style="display:none;">
-                    <h3 class="text-2xl font-bold brand-blue mb-4">إدارة فعالة لشركات تأجير السيارات</h3>
-                    <p class="text-gray-700">قم بإدارة أسطول سيارات التأجير الخاص بك بكفاءة. يتيح لك نظامنا تتبع جميع السيارات، ومعرفة أوقات التشغيل، وتحديد مواقعها بدقة، مما يقلل من مخاطر السرقة ويزيد من أرباحك التشغيلية.</p>
-                </div>
-                <div id="fleet" class="tab-content bg-white p-8 rounded-xl shadow-md" style="display:none;">
-                    <h3 class="text-2xl font-bold brand-blue mb-4">تحكم كامل في أساطيل النقل والشاحنات</h3>
-                    <p class="text-gray-700">حلول متخصصة لتتبع الشاحنات والمعدات الثقيلة، مع تقارير مفصلة عن ساعات العمل، استهلاك الوقود، والامتثال الكامل لمتطلبات منصة "وصل" لاستخراج كرت التشغيل.</p>
-                </div>
-                <div id="schools" class="tab-content bg-white p-8 rounded-xl shadow-md" style="display:none;">
-                    <h3 class="text-2xl font-bold brand-blue mb-4">سلامة الطلاب هي أولويتنا</h3>
-                    <p class="text-gray-700">اضمن سلامة الطلاب مع نظام تتبع حافلات المدارس. راقب مسار الحافلة، واحصل على تنبيهات عند الوصول والمغادرة، وشارك الموقع مع أولياء الأمور لراحتهم وراحة بالك.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Free Trial Section -->
-    <section class="py-20">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-extrabold brand-blue mb-4">شاهد قوة نظام تتبع المركبات بنفسك الآن</h2>
-                <p class="text-lg text-gray-600 max-w-3xl mx-auto">جرّب واجهة تطبيق “تواصل الرياض” واكتشف سهولة إدارة أسطولك أو سيارتك عبر حسابنا التجريبي.</p>
-            </div>
-            <div class="flex flex-wrap items-center justify-center -mx-4">
-                <div class="w-full md:w-1/2 px-4 mb-8 md:mb-0">
-                    <img src="https://storage.googleapis.com/gemini-prod-us-west1-assets/images/154508e7a08de3cf.jpeg" alt="واجهة تطبيق تواصل الرياض على الهاتف" class="rounded-lg shadow-2xl mx-auto">
-                </div>
-                <div class="w-full md:w-1/2 px-4">
-                    <ul class="space-y-4 text-lg">
-                        <li class="flex items-start"><span class="brand-gold text-2xl ml-3 mt-1">&#10003;</span> <span>**خريطة تفاعلية 24/7:** متابعة لحظية لمواقع وسرعات مركباتك.</span></li>
-                        <li class="flex items-start"><span class="brand-gold text-2xl ml-3 mt-1">&#10003;</span> <span>**تقارير فورية:** تصدير PDF/Excel للرحلات، الوقود، وأوقات التشغيل.</span></li>
-                        <li class="flex items-start"><span class="brand-gold text-2xl ml-3 mt-1">&#10003;</span> <span>**تنبيهات ذكية:** سرعة زائدة، خروج عن المناطق المحددة، وتنبيهات صيانة.</span></li>
-                        <li class="flex items-start"><span class="brand-gold text-2xl ml-3 mt-1">&#10003;</span> <span>**ربط مباشر بمنصة وصل:** استخراج كرت التشغيل خلال 24 ساعة بضغطة زر.</span></li>
-                    </ul>
-                    <div class="mt-8 text-center md:text-right">
-                        <a href="#" class="bg-brand-blue text-white font-bold py-3 px-8 rounded-lg hover:bg-opacity-90 transition-colors text-lg">
-                            جرب النظام مجاناً الآن
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Dashcam Section -->
-    <section class="py-20 bg-gray-100">
-        <div class="container mx-auto px-6">
-            <div class="flex flex-wrap items-center -mx-4">
-                <div class="w-full md:w-1/2 px-4 mb-8 md:mb-0">
-                    <h2 class="text-4xl font-extrabold brand-blue mb-4">تعرّف على الداش كام الذكي</h2>
-                    <p class="text-lg text-gray-700 mb-6">حافظ على سلامتك وسلامة سائقيك مع أحدث داش كام ذكي في السوق. هذه الكاميرا المزودة بالذكاء الاصطناعي لا تسجل الطريق فقط، بل تراقب سلوك السائق لضمان أعلى مستويات الأمان.</p>
-                    <ul class="space-y-3">
-                        <li class="flex items-center"><span class="text-green-500 text-2xl ml-3">&#10003;</span>تنبيه السائق عند النعاس أو التثاؤب.</li>
-                        <li class="flex items-center"><span class="text-green-500 text-2xl ml-3">&#10003;</span>تنبيه عند عدم التركيز أو استخدام الجوال أثناء القيادة.</li>
-                        <li class="flex items-center"><span class="text-green-500 text-2xl ml-3">&#10003;</span>جودة تصوير عالية الدقة (Full HD) ليلاً ونهاراً.</li>
-                    </ul>
-                     <a href="#contact-form" class="mt-8 inline-block bg-amber-500 text-brand-blue font-bold py-3 px-8 rounded-lg hover:bg-amber-400 transition-colors">
-                        اطلب الداش كام الذكي الآن
-                    </a>
-                </div>
-                 <div class="w-full md:w-1/2 px-4">
-                    <img src="https://storage.googleapis.com/gemini-prod-us-west1-assets/images/7d7a46979ed10271.jpeg" alt="كاميرا داش كام الذكية" class="rounded-lg shadow-2xl">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Devices Section -->
-    <section class="py-20">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-4xl font-extrabold brand-blue mb-4">أجهزة تتبع GPS أوروبية هي الأكثر دقة وموثوقية</h2>
-            <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-10">نحن نستخدم فقط أجهزة تتبع أوروبية الصنع وعالية الجودة لضمان دقة لا تضاهى في تحديد المواقع واستمرارية في الخدمة يمكنك الاعتماد عليها.</p>
-            <div class="flex justify-center flex-wrap gap-8">
-                <img src="https://storage.googleapis.com/gemini-prod-us-west1-assets/images/30b925b64c015b6d.jpeg" alt="جهاز تتبع GPS موديل 1" class="h-40 rounded-lg shadow-lg">
-                <img src="https://storage.googleapis.com/gemini-prod-us-west1-assets/images/d3de4063223f66a9.jpeg" alt="جهاز تتبع GPS موديل 2" class="h-40 rounded-lg shadow-lg">
-                <img src="https://storage.googleapis.com/gemini-prod-us-west1-assets/images/62153b6f0e3f7c46.jpeg" alt="جهاز تتبع GPS موديل 3" class="h-40 rounded-lg shadow-lg">
-            </div>
-        </div>
-    </section>
-
-     <!-- About Us Section -->
-    <section class="py-20 bg-gray-100">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-4xl font-extrabold brand-blue mb-4">عن شركة تواصل الرياض</h2>
-            <p class="text-lg text-gray-700 max-w-4xl mx-auto mb-8">
-                تأسست شركة تواصل الرياض منذ عام 2012 على يد نخبة من الخبراء والمختصين، حيث وضعت الشركة أسساً واستراتيجيات قوية لتصبح واحدة من الشركات الرائدة في المملكة العربية السعودية. تعتمد استراتيجيتنا على دراسة احتياجات السوق وتقديم أحدث الأجهزة والأنظمة، مع مراعاة توفير خدمات شاملة تتناسب مع التكاليف والجودة العالمية.
-            </p>
-            <a href="#" class="bg-brand-blue text-white font-bold py-3 px-8 rounded-lg hover:bg-opacity-90 transition-colors">
-                📄 تحميل الملف التعريفي للشركة
-            </a>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section class="py-20">
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-extrabold brand-blue mb-12 text-center">آراء عملائنا</h2>
+        <!-- Section 2: "While you wait..." Engagement Hub -->
+        <section class="w-full max-w-6xl mx-auto mt-12 text-center">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8">بينما تنتظر مكالمة خبيرنا، اكتشف المزيد:</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Testimonial Card -->
-                <div class="bg-white p-8 rounded-xl shadow-lg border-t-4 border-brand-gold">
-                    <p class="text-gray-600 mb-6">"شكراً لشركة تواصل الرياض، أنا مشترك معهم من أكثر من ٧ سنوات وخدماتهم مميزة. بصراحة هم أفضل شركة تتبع، عندهم عروض وخصومات واستخدام التطبيق سهل جداً. أوصي بهم بشدة."</p>
-                    <div class="flex items-center">
-                        <img src="https://storage.googleapis.com/gemini-prod-us-west1-assets/images/f90912176461c341.jpeg" alt="صورة رمزية للسيدة شذى الإبراهيمي" class="w-12 h-12 rounded-full mr-4 ml-4 object-cover">
-                        <div>
-                            <p class="font-bold text-gray-800">Shatha Albrahimi</p>
-                            <p class="text-sm text-gray-500">عميل منذ ٧ سنوات</p>
-                        </div>
-                    </div>
+                
+                <!-- Card 1: Watch Video -->
+                <div id="open-modal-button" class="card bg-white rounded-xl shadow-lg p-6 cursor-pointer">
+                    <div class="text-4xl mb-4 text-amber-500">🎬</div>
+                    <h3 class="text-xl font-bold text-blue-900 mb-2">شاهد قوة نظامنا بنفسك</h3>
+                    <p class="text-gray-600 mb-4">شاهد في 60 ثانية كيف يمكنك تتبع مركبتك وإيقافها بضغطة زر من جوالك.</p>
+                    <span class="font-bold text-blue-600 hover:text-blue-800">شاهد الفيديو الآن &larr;</span>
                 </div>
-                <!-- Testimonial Card -->
-                <div class="bg-white p-8 rounded-xl shadow-lg border-t-4 border-brand-gold">
-                    <p class="text-gray-600 mb-6">"ركبت جهاز تتبع قبل سنتين، وعند رغبتي في نقله لسيارة أخرى، تواصلت معهم عبر الواتساب وكان التجاوب سريعاً وتحديد الموعد سهلاً وسلساً. أقدّر هذا المستوى المتميز من الخدمة."</p>
-                    <div class="flex items-center">
-                        <img src="https://storage.googleapis.com/gemini-prod-us-west1-assets/images/681df79d30026e2a.jpeg" alt="صورة رمزية للسيد عمر الهلالي" class="w-12 h-12 rounded-full mr-4 ml-4 object-cover">
-                        <div>
-                            <p class="font-bold text-gray-800">عمر الهلالي</p>
-                            <p class="text-sm text-gray-500">عميل ومراجع محلي</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Testimonial Card -->
-                <div class="bg-white p-8 rounded-xl shadow-lg border-t-4 border-brand-gold">
-                    <p class="text-gray-600 mb-6">"نحن مؤسسة مرجانة الساحل للنقليات كنا متعاملين مع تتبع مركبات غير شركة تواصل الرياض، سبب تركنا لهم هو عدم التجاوب بسرعة كافية. أنصح كل شركة ومؤسسة بالتعامل مع تواصل الرياض."</p>
-                    <div class="flex items-center">
-                        <img src="https://storage.googleapis.com/gemini-prod-us-west1-assets/images/330b65f0ed56b198.jpeg" alt="صورة رمزية للسيد عبودي سارحة" class="w-12 h-12 rounded-full mr-4 ml-4 object-cover">
-                        <div>
-                            <p class="font-bold text-gray-800">Aboody sarebah</p>
-                            <p class="text-sm text-gray-500">مؤسسة مرجانة الساحل</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Branches Map Section -->
-    <section class="py-20 bg-gray-100">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-extrabold brand-blue mb-4">فروعنا تغطي كافة أنحاء المملكة</h2>
-                <p class="text-lg text-gray-600 max-w-3xl mx-auto">تفضل بزيارة أقرب فرع لك في الرياض، جدة، الدمام، جازان، تبوك، القصيم، والمدينة المنورة.</p>
-            </div>
-            <div class="map-container rounded-lg shadow-2xl">
-                 <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d6981144.113589886!2d41.93380434774577!3d24.08986884507027!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1z2KfZhNmF2K_ZitmG2Kkg2KjYp9mE2YXZiiDYqNin2YTYs9i52YjYr9mK!5e0!3m2!1sar!2seg!4v1689626931245!5m2!1sar!2seg" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-        </div>
-    </section>
+                <!-- Card 2: Cross-sell Dashcam -->
+                <a href="#" class="card bg-white rounded-xl shadow-lg p-6 block">
+                    <div class="text-4xl mb-4 text-amber-500">📹</div>
+                    <h3 class="text-xl font-bold text-blue-900 mb-2">هل فكرت في إضافة داش كام؟</h3>
+                    <p class="text-gray-600 mb-4">اكتشف كيف يمكنك حماية نفسك وسائقيك بكاميرا ذكية تراقب الطريق وسلوك السائق.</p>
+                    <span class="font-bold text-blue-600 hover:text-blue-800">تعرّف على الداش كام &larr;</span>
+                </a>
 
-    <!-- Contact Form Section -->
-    <section id="contact-form" class="py-20">
-        <div class="container mx-auto px-6">
-            <div class="max-w-3xl mx-auto bg-white p-8 md:p-12 rounded-2xl shadow-2xl">
-                <h2 class="text-4xl font-extrabold brand-blue mb-4 text-center">ابدأ قصة نجاحك الآن</h2>
-                <p class="text-center text-gray-600 mb-8">املأ النموذج التالي وسيقوم أحد خبرائنا بالتواصل معك لتقديم استشارة مجانية وعرض سعر مخصص.</p>
-                <form>
-                    <div class="mb-5">
-                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900">الاسم بالكامل*</label>
-                        <input type="text" id="name" class="block w-full p-3 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="مثال: محمد عبدالله" required>
-                    </div>
-                    <div class="mb-5">
-                        <label for="phone" class="block mb-2 text-sm font-medium text-gray-900">رقم الهاتف أو الواتساب*</label>
-                        <input type="tel" id="phone" class="block w-full p-3 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="05xxxxxxxx" required>
-                    </div>
-                    <div class="mb-8">
-                        <label for="service" class="block mb-2 text-sm font-medium text-gray-900">ما الخدمة التي تستفسر عنها؟*</label>
-                        <select id="service" class="block w-full p-3 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500">
-                            <option selected>اختر الخدمة</option>
-                            <option value="personal">تتبع سيارة شخصية</option>
-                            <option value="fleet_small">إدارة أسطول (أقل من 10 مركبات)</option>
-                            <option value="fleet_large">إدارة أسطول (أكثر من 10 مركبات)</option>
-                            <option value="dashcam">داش كام</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="text-white bg-brand-blue hover:bg-opacity-90 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold rounded-lg text-lg w-full px-5 py-4 text-center">احجز استشارتك المجانية</button>
-                </form>
+                <!-- Card 3: Social Proof -->
+                <a href="#" class="card bg-white rounded-xl shadow-lg p-6 block">
+                    <div class="text-4xl mb-4 text-amber-500">⭐</div>
+                    <h3 class="text-xl font-bold text-blue-900 mb-2">لماذا يثق بنا الآلاف؟</h3>
+                    <p class="text-gray-600 mb-4">اقرأ قصص نجاح عملاء من أفراد وشركات استطاعوا تأمين أساطيلهم وحماية مركباتهم معنا.</p>
+                    <span class="font-bold text-blue-600 hover:text-blue-800">اقرأ آراء العملاء &larr;</span>
+                </a>
+
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Footer -->
-    <footer class="bg-brand-blue text-white">
-        <div class="container mx-auto px-6 py-8 text-center">
-            <p>&copy; 2025 شركة تواصل الرياض المحدودة. جميع الحقوق محفوظة.</p>
-            <p class="text-sm text-gray-300 mt-2">حلول معتمدة لتتبع المركبات وإدارة الأساطيل في المملكة العربية السعودية.</p>
-        </div>
-    </footer>
-
-    <!-- WhatsApp Floating Button -->
-    <div class="whatsapp-container">
-         <div class="whatsapp-message">
-            خليني أرد على كل استفساراتك
-        </div>
-        <a href="https://wa.me/966112047050?text=أرغب%20في%20الاستفسار%20عن%20خدماتكم" target="_blank" class="whatsapp-button">
-            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20"><path d="M13.545 2.907a7.427 7.427 0 00-10.655 10.655l-1.688 4.982 5.083-1.688a7.427 7.427 0 0010.655-10.655l-3.395-3.294zM12.91 12.083c-.225.42-.905.77-1.25.795-.345.025-1.04-.15-1.99-.99-.95-.84-1.575-1.895-1.6-1.925-.025-.03.025-.055.075-.105.05-.05.12-.14.17-.19.05-.05.12-.1.145-.145.025-.045.05-.12.025-.165l-.225-.56c-.05-.145-.12-.29-.195-.365-.075-.075-.17-.1-.245-.1h-.145c-.075 0-.225.025-.345.145s-.445.42-.56.84c-.115.42-.14.865.05 1.445.19.58.76 1.515 1.67 2.42.91.905 1.845 1.48 2.42 1.67.58.19 1.025.165 1.445.05.42-.115.84-.445.84-.56.12-.12.145-.27.145-.345v-.145c0-.075-.025-.17-.1-.245s-.12-.145-.195-.195l-.56-.225c-.045-.025-.12-.05-.165.025z"/></svg>
-        </a>
+        <!-- Section 3: Fast Track CTA -->
+        <section class="w-full max-w-4xl mx-auto mt-16 text-center bg-green-50 p-8 rounded-2xl border-t-4 border-green-500">
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4">هل تحتاج إلى إجابة فورية؟</h2>
+            <p class="text-gray-600 mb-6 max-w-xl mx-auto">لا تتردد في التواصل معنا مباشرة عبر الواتساب. فريقنا جاهز للرد على جميع استفساراتك الآن.</p>
+            <a href="https://wa.me/966112047050 " target="_blank" class="inline-flex items-center justify-center bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-full text-lg transition-transform transform hover:scale-105">
+                <span class="ml-2">💬</span>
+                تحدث معنا مباشرة عبر الواتساب
+            </a>
+        </section>
     </div>
 
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <!-- Video Modal -->
+    <div id="videoModal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-50 opacity-0 pointer-events-none">
+        <div class="bg-white rounded-lg shadow-2xl w-full max-w-3xl overflow-hidden relative">
+            <button id="close-modal-button" class="absolute top-2 right-2 text-white bg-black bg-opacity-50 rounded-full w-8 h-8 flex items-center justify-center text-2xl z-10">&times;</button>
+            <div class="aspect-w-16 aspect-h-9">
+                <!-- Replace with your actual video embed URL -->
+                <iframe class="w-full h-full" src="https://www.youtube.com/embed/bOoGr88GYz0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+    
     <script>
-        // Tab functionality
-        function openTab(evt, tabName) {
-            var i, tabcontent, tabbuttons;
-            tabcontent = document.getElementsByClassName("tab-content");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-            tabbuttons = document.getElementsByClassName("tab-button");
-            for (i = 0; i < tabbuttons.length; i++) {
-                tabbuttons[i].className = tabbuttons[i].className.replace(" active", "");
-            }
-            document.getElementById(tabName).style.display = "block";
-            evt.currentTarget.className += " active";
+        const videoModal = document.getElementById('videoModal');
+        const openModalButton = document.getElementById('open-modal-button');
+        const closeModalButton = document.getElementById('close-modal-button');
+
+        function openModal() {
+            videoModal.classList.remove('opacity-0', 'pointer-events-none');
         }
 
-        // Swiper slider for logos
-        var swiper = new Swiper('.logo-slider', {
-            loop: true,
-            autoplay: {
-                delay: 2500,
-                disableOnInteraction: false,
-            },
-            slidesPerView: 2,
-            spaceBetween: 20,
-            breakpoints: {
-                640: {
-                    slidesPerView: 3,
-                    spaceBetween: 30,
-                },
-                768: {
-                    slidesPerView: 4,
-                    spaceBetween: 40,
-                },
-                1024: {
-                    slidesPerView: 6,
-                    spaceBetween: 50,
-                },
+        function closeModal() {
+            videoModal.classList.add('opacity-0', 'pointer-events-none');
+            // Stop the video from playing
+            const iframe = videoModal.querySelector('iframe');
+            const videoSrc = iframe.src;
+            iframe.src = videoSrc; // This reloads the iframe, stopping the video
+        }
+
+        openModalButton.addEventListener('click', openModal);
+        closeModalButton.addEventListener('click', closeModal);
+        
+        // Close modal when clicking on the background overlay
+        videoModal.addEventListener('click', (event) => {
+            if (event.target === videoModal) {
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                closeModal();
             }
         });
     </script>
